@@ -491,11 +491,18 @@ static void codegen_cleanup(compile_t* c)
 bool codegen_init(pass_opt_t* opt)
 {
   LLVMInitializeNativeTarget();
+#if defined PLATFORM_IS_MIPS
+  LLVMInitializeMipsTargetMCs();
+  LLVMInitializeMipsTargetInfos();
+  LLVMInitializeMipsAsmPrinters();
+  LLVMInitializeMipsAsmParsers();
+#else
   LLVMInitializeAllTargets();
   LLVMInitializeAllTargetMCs();
   LLVMInitializeAllTargetInfos();
   LLVMInitializeAllAsmPrinters();
   LLVMInitializeAllAsmParsers();
+#endif
   LLVMEnablePrettyStackTrace();
   LLVMInstallFatalErrorHandler(fatal_error);
 
@@ -521,6 +528,9 @@ bool codegen_init(pass_opt_t* opt)
 #ifdef PLATFORM_IS_MACOSX
     // This is to prevent XCode 7+ from claiming OSX 14.5 is required.
     opt->triple = LLVMCreateMessage("x86_64-apple-macosx");
+#elif PLATFORM_IS_MIPS
+    // This is used to force the target to a valid target on OpenWRT
+    opt->triple = LLVMCreateMessage("mipsel-unknown-linux-gnu");
 #else
     opt->triple = LLVMGetDefaultTargetTriple();
 #endif

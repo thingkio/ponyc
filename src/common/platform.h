@@ -110,6 +110,45 @@
 #  define PLATFORM_IS_ILP32
 #endif
 
+/** MIPS architecture flags.
+ *
+ */
+#if defined(_MIPS_ARCH_MIPS64R5) || \
+    defined(_MIPS_ARCH_MIPS64R3) || \
+    defined(_MIPS_ARCH_MIPS64R2) || \
+    defined(_MIPS_ARCH_MIPS64)
+#define MIPS64 1
+#endif
+
+#if defined(MIPS64) || \
+    defined(_MIPS_ARCH_MIPS32R6) || \
+    defined(_MIPS_ARCH_MIPS32R5) || \
+    defined(_MIPS_ARCH_MIPS32R3) || \
+    defined(_MIPS_ARCH_MIPS32R2) || \
+    defined(_MIPS_ARCH_MIPS32)
+#define MIPS32 1
+#endif
+
+#if defined(MIPS32) || \
+    defined(_MIPS_ARCH_MIPS4)
+#define MIPS4 1
+#endif
+
+#if defined(MIPS4) || \
+    defined(_MIPS_ARCH_MIPS3)
+#define MIPS3 1
+#endif
+
+#if defined(MIPS3) || \
+   defined(_MIPS_ARCH_MIPS2)
+#define MIPS2 1
+#endif
+
+#if defined(MIPS2) || \
+   defined(_MIPS_ARCH_MIPS1)
+#define MIPS1 1
+#endif
+
 /** ARM architecture flags.
  *
  */
@@ -157,7 +196,10 @@
 /** Architecture flags.
  *
  */
-#if defined(ARMV2) || defined(__arm__) || defined(__aarch64__)
+#if defined(MIPS64) || defined(MIPS32) || defined(MIPS4) || \
+    defined(MIPS3) || defined(MIPS2) || defined(MIPS1)
+# define PLATFORM_IS_MIPS
+#elif defined(ARMV2) || defined(__arm__) || defined(__aarch64__)
 # define PLATFORM_IS_ARM
 #elif defined(__i386__) || defined(_M_IX86) || defined(_X86_) || \
  defined(__amd64__) || defined(__x86_64__) || defined(_M_X64) || \

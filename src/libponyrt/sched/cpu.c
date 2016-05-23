@@ -235,7 +235,7 @@ void ponyint_cpu_relax()
 
 uint64_t ponyint_cpu_tick()
 {
-#if defined PLATFORM_IS_ARM
+#if defined PLATFORM_IS_ARM || defined PLATFORM_IS_MIPS
 # if defined(__APPLE__)
   return mach_absolute_time();
 # else

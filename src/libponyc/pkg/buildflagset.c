@@ -23,6 +23,7 @@ static const char* _arch_flags[] =
 {
   OS_X86_NAME,
   OS_ARM_NAME,
+  OS_MIPS_NAME,
   "unknown_arch",
   NULL  // Terminator.
 };

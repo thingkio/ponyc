@@ -976,6 +976,19 @@ static void platform_arm(compile_t* c, reach_type_t* t)
   BOX_FUNCTION();
 }
 
+static void platform_mips(compile_t* c, reach_type_t* t)
+{
+  FIND_METHOD("mips");
+  start_function(c, m, c->i1, &t->use_type, 1);
+
+  LLVMValueRef result =
+    LLVMConstInt(c->i1, target_is_mips(c->opt->triple), false);
+  LLVMBuildRet(c->builder, result);
+  codegen_finishfun(c);
+
+  BOX_FUNCTION();
+}
+
 static void platform_lp64(compile_t* c, reach_type_t* t)
 {
   FIND_METHOD("lp64");
@@ -1048,6 +1061,7 @@ void genprim_platform_methods(compile_t* c, reach_type_t* t)
   platform_windows(c, t);
   platform_x86(c, t);
   platform_arm(c, t);
+  platform_mips(c, t);
   platform_lp64(c, t);
   platform_llp64(c, t);
   platform_ilp32(c, t);

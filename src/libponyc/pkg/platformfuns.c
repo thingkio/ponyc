@@ -53,6 +53,12 @@ bool os_is_target(const char* attribute, bool release, bool* out_is_target, pass
     return true;
   }
 
+  if(!strcmp(attribute, OS_MIPS_NAME))
+  {
+    *out_is_target = target_is_mips(options->triple);
+    return true;
+  }
+
   if(!strcmp(attribute, OS_LP64_NAME))
   {
     *out_is_target = target_is_lp64(options->triple);

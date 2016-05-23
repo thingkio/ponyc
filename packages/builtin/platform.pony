@@ -13,6 +13,7 @@ primitive Platform
 
   fun x86(): Bool => compile_intrinsic
   fun arm(): Bool => compile_intrinsic
+  fun mips(): Bool => compile_intrinsic
 
   fun lp64(): Bool => compile_intrinsic
   fun llp64(): Bool => compile_intrinsic

@@ -664,6 +664,15 @@ bool target_is_arm(char* t)
   return !strcmp("arm", arch);
 }
 
+bool target_is_mips(char* t)
+{
+  Triple triple = Triple(t);
+
+  const char* arch = Triple::getArchTypePrefix(triple.getArch());
+
+  return !strcmp("mips", arch);
+}
+
 bool target_is_lp64(char* t)
 {
   Triple triple = Triple(t);
