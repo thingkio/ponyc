@@ -493,10 +493,10 @@ bool codegen_init(pass_opt_t* opt)
 {
   LLVMInitializeNativeTarget();
 #if defined PLATFORM_IS_MIPS
-  LLVMInitializeMipsTargetMCs();
-  LLVMInitializeMipsTargetInfos();
-  LLVMInitializeMipsAsmPrinters();
-  LLVMInitializeMipsAsmParsers();
+  LLVMInitializeMipsTargetMC();
+  LLVMInitializeMipsTargetInfo();
+  LLVMInitializeMipsAsmPrinter();
+  LLVMInitializeMipsAsmParser();
 #else
   LLVMInitializeAllTargets();
   LLVMInitializeAllTargetMCs();
